@@ -43,4 +43,4 @@ jobs:
       run: cargo check
 
     - name: Test
-      run: cargo test --features osrng,sha1,serde,std,md5
+      run: cargo test --features osrng,prng,sha1,serde,std,md5

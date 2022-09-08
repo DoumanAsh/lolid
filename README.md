@@ -10,6 +10,7 @@ Minimal `no_std` UUID implementation.
 
 - `md5`   - Enables v3;
 - `orng`  - Enables v4 using OS random, allowing unique UUIDs;
+- `prng`  - Enables v4 using pseudo random, allowing unique, but predictable UUIDs;
 - `sha1`  - Enables v5;
 - `serde` - Enables `serde` support;
 - `std`   - Enables usages of `std` facilities like getting current time.

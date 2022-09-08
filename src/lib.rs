@@ -4,6 +4,7 @@
 //!
 //!- `md5`   - Enables v3;
 //!- `orng`  - Enables v4 using OS random, allowing unique UUIDs;
+//!- `prng`  - Enables v4 using pseudo random, allowing unique, but predictable UUIDs;
 //!- `sha1`  - Enables v5;
 //!- `serde` - Enables `serde` support;
 //!- `std`   - Enables usages of `std` facilities like getting current time.
@@ -414,6 +415,24 @@ impl Uuid {
         }
 
         Self::v4_from(bytes)
+    }
+
+    #[cfg(feature = "prng")]
+    ///Generates UUID `v4` using PRNG from [wyhash](https://crates.io/crates/wy)
+    ///
+    ///Only available when `prng` feature is enabled.
+    ///
+    ///This random variant generates predictable UUID, even though they are unique.
+    ///Which means that each time program starts, it is initialized with the same seed and
+    ///therefore would repeat UUIDs
+    ///
+    ///This random is useful when you want to generate predictable but unique UUIDs
+    ///Otherwise use `v4`
+    pub fn v4_prng() -> Self {
+        static RANDOM: squares_rnd::Rand = squares_rnd::Rand::new(1);
+        let right = u128::from(RANDOM.next_u64());
+        let left = u128::from(RANDOM.next_u64());
+        Self::v4_from(((left << 64) |  right).to_ne_bytes())
     }
 
     #[cfg(feature = "sha1")]

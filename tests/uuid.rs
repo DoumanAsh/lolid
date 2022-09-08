@@ -66,13 +66,13 @@ fn check_v1_std() {
 #[cfg(feature = "prng")]
 #[test]
 fn check_random_uuid4_prng() {
-    let uuid = Uuid::prng();
+    let uuid = Uuid::v4_prng();
     assert!(uuid.is_version(lolid::Version::Random));
     assert!(!uuid.is_version(lolid::Version::Sha1));
     assert!(uuid.is_variant());
     let uuid = uuid.to_string();
     assert_eq!(uuid.len(), 36);
-    assert_ne!(uuid, Uuid::prng().to_string());
+    assert_ne!(uuid, Uuid::v4_prng().to_string());
 }
 
 #[cfg(feature = "osrng")]

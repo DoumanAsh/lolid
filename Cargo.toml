@@ -1,6 +1,6 @@
 [package]
 name = "lolid"
-version = "2.0.0"
+version = "2.0.1"
 authors = ["Douman <douman@gmx.se>"]
 edition = "2018"
 license = "BSL-1.0"
@@ -17,6 +17,10 @@ include = [
 
 [dependencies]
 str-buf = "3"
+
+[dependencies.squares-rnd]
+version = "3"
+optional = true
 
 [dependencies.getrandom]
 version = "0.2"
@@ -36,6 +40,8 @@ optional = true
 [features]
 # Enables v4 with OS RNG
 osrng = ["getrandom"]
+# Enables v4 with pseudo RNG
+prng = ["squares-rnd"]
 # Enables usage of OS facilities (e.g. current time)
 std = []
 # Enables v5
@@ -47,4 +53,4 @@ md5 = ["lhash/md5"]
 version = "1.0"
 
 [package.metadata.docs.rs]
-features = ["osrng", "sha1", "serde", "std", "md5"]
+features = ["osrng", "prng", "sha1", "serde", "std", "md5"]
