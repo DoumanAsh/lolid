@@ -1,0 +1,50 @@
+[package]
+name = "lolid"
+version = "2.0.0"
+authors = ["Douman <douman@gmx.se>"]
+edition = "2018"
+license = "BSL-1.0"
+repository = "https://github.com/DoumanAsh/lolid"
+readme = "README.md"
+description = "Minimal UUID implementation"
+categories = ["no-std"]
+keywords = ["uuid", "unique"]
+include = [
+    "**/*.rs",
+    "Cargo.toml",
+    "README.md"
+]
+
+[dependencies]
+str-buf = "3"
+
+[dependencies.getrandom]
+version = "0.2"
+default-features = false
+optional = true
+
+[dependencies.lhash]
+version = "1.0.1"
+optional = true
+default-features = false
+
+[dependencies.serde]
+version = "1"
+default-features = false
+optional = true
+
+[features]
+# Enables v4 with OS RNG
+osrng = ["getrandom"]
+# Enables usage of OS facilities (e.g. current time)
+std = []
+# Enables v5
+sha1 = ["lhash/sha1"]
+# Enables v3
+md5 = ["lhash/md5"]
+
+[dev-dependencies.bincode]
+version = "1.0"
+
+[package.metadata.docs.rs]
+features = ["osrng", "sha1", "serde", "std", "md5"]
