@@ -58,6 +58,7 @@ fn check_v1_std() {
     const MAC: [u8; 6] = [1, 2, 3, 4, 5, 6];
 
     let uuid_before = Uuid::v1(lolid::Timestamp::now(), MAC);
+    std::thread::sleep(core::time::Duration::from_secs(1));
     let uuid_after = Uuid::v1(lolid::Timestamp::now(), MAC);
     assert_ne!(uuid_after, uuid_before);
 }
